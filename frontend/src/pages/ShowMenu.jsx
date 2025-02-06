@@ -24,7 +24,7 @@ const ShowMenu = ({ menuId, menuDes }) => {
           className="absolute top-[-40px] left-[-40px] md:top-[-100px] md:left-[-20px] w-[60px] md:w-[130px] h-auto"
         />
 
-        <h2 className="font-oswald font-semibold relative inline-block text-[24px] md:text-[50px]">
+        <h2 className="font-oswald font-semibold relative inline-block text-[24px] md:text-[50px] oswald">
           {menuDes}
           <div className="absolute left-[-80px] top-1/2 w-[60px] border-t-4 border-gray-500 hidden md:block"></div>
           <div className="absolute right-[-80px] top-1/2 w-[60px] border-t-4 border-gray-500 hidden md:block"></div>
@@ -38,10 +38,10 @@ const ShowMenu = ({ menuId, menuDes }) => {
             {menuItems.map((item) => (
               <div key={item._id} className="w-full bg-[#1a1a1a] p-4 rounded-lg shadow-md text-left">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-lg md:text-xl font-semibold">{item.name}</h3>
-                  <p className="text-md md:text-lg font-bold text-[#0796EF]">${item.price}</p>
+                  <h3 className="text-lg md:text-xl font-semibold oswald">{item.name}</h3>
+                  <p className="text-md md:text-lg font-bold text-[#0796EF] kelly">${item.price}</p>
                 </div>
-                <p className="text-gray-400">{item.description}</p>
+                <p className="text-gray-400 kelly">{item.description}</p>
               </div>
             ))}
           </div>
