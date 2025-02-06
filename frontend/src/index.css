@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&display=swap');
+.menu-des{
+    font-family: "Kelly Slab", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+.menu-hea{
+    font-family: "Oswald", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.oswald{
+    font-family: "Oswald", serif;
+    font-style: normal;
+}
+.kelly{
+    font-family: "Kelly Slab", serif;
+    font-style: normal;
+
+}
