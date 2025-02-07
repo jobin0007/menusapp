@@ -21,10 +21,13 @@ const connectDB=async() =>{
 connectDB()
 
 const corsOptions = {
-    origin: process.env.FRONTENDAPI,
+    origin: process.env.NODE_ENV === 'production' ? process.env.FRONTENDAPI : 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     optionsSuccessStatus: 200,
-    credentials:true
-  }
+    credentials: true,
+  };
+  
 
   app.get('/', (req, res) => {
     res.send('Welcome to the backend!');
