@@ -21,7 +21,7 @@ const connectDB=async() =>{
 connectDB()
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: process.env.FRONTENDAPI,
     optionsSuccessStatus: 200,
     credentials:true
   }
