@@ -27,6 +27,11 @@ const corsOptions = {
     credentials:true
   }
 
+  app.get('/', (req, res) => {
+    res.send('Welcome to the backend!');
+  });
+
+
 app.use(cors(corsOptions))
 app.use(cookie())
 app.use(express.json())
