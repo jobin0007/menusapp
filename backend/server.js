@@ -1,48 +1,52 @@
 
-require('dotenv').config()
-const express = require('express')
-const mongoose = require('mongoose')
-const errorHandler = require('./middleware/errorHandler')
-const  routes  = require('./routes')
-const cookie = require('cookie-parser')
-const app = express()
-const cors = require('cors')
+const express = require('express');
+const mongoose = require('mongoose');
+const errorHandler = require('./middleware/errorHandler');
+const routes = require('./routes');
+const cookie = require('cookie-parser');
+const cors = require('cors');
+const app = express();
 
-const connectDB=async() =>{
+require('dotenv').config();
+
+const connectDB = async () => {
     try {
-        mongoose.connect(process.env.MONGO_URI)
-        console.log("DB running");
-        
+        await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log("DB connected successfully");
     } catch (error) {
-        console.log(error)
+        console.error("DB connection error:", error);
+        process.exit(1);  
     }
-}
+};
 
-connectDB()
+connectDB();
+
 
 const corsOptions = {
-    origin: process.env.FRONTENDAPI,
+    origin: process.env.FRONTENDAPI || 'http://localhost:3000', 
     optionsSuccessStatus: 200,
-    credentials:true,
+    credentials: true,
+};
 
-  }
+app.use(cors(corsOptions));
+app.use(cookie());
+app.use(express.json());
 
-  app.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Welcome to the backend!');
-  });
+});
 
 
-app.use(cors(corsOptions))
-app.use(cookie())
-app.use(express.json())
-
-app.use(routes)
+app.use(routes);
 
 
-app.use(errorHandler)
+app.use(errorHandler);
 
-app.listen(process.env.PORT,()=>{
-    console.log("running successfully")
-})
 
- 
+const PORT = process.env.PORT || 5004;  
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
