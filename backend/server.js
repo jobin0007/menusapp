@@ -9,26 +9,33 @@ const app = express();
 
 require('dotenv').config();
 
+const PORT = process.env.PORT || 5004;
+const MONGO_URI = process.env.MONGO_URI;
+
+if (!MONGO_URI) {
+    console.error("ERROR: MONGO_URI is missing in environment variables");
+    process.exit(1);
+}
+
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI, {
+        await mongoose.connect(MONGO_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            connectTimeoutMS: 30000, 
-            socketTimeoutMS: 45000, 
+            serverSelectionTimeoutMS: 50000, 
+            socketTimeoutMS: 60000, 
         });
-        console.log("DB connected successfully");
+        console.log("MongoDB Connected Successfully");
     } catch (error) {
-        console.error("DB connection error:", error);
-        process.exit(1);  
+        console.error("MongoDB Connection Error:", error.message);
+        process.exit(1); 
     }
 };
 
 connectDB();
 
-
 const corsOptions = {
-    origin: process.env.FRONTENDAPI || 'http://localhost:3000', 
+    origin: process.env.FRONTENDAPI || 'http://localhost:3000',
     optionsSuccessStatus: 200,
     credentials: true,
 };
@@ -42,13 +49,10 @@ app.get('/', (req, res) => {
 });
 
 
+
 app.use(routes);
-
-
 app.use(errorHandler);
 
-
-const PORT = process.env.PORT || 5004;  
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
