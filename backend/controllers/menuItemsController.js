@@ -1,6 +1,6 @@
-const MenuItem = require('../model/menuItemsScehma')
 
 const asyncHandler= require( "express-async-handler");
+const MenuItem = require("../model/MenuItemsScehma");
 
 
 const menuItemsController = {

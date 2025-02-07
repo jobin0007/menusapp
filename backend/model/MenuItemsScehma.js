@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+
 const menuItemScehma =new mongoose.Schema({
   menu: { type: String, ref: "Menu", required: true },
   name: { type: String, required: true },
@@ -8,3 +9,4 @@ const menuItemScehma =new mongoose.Schema({
 
 const MenuItem = mongoose.model("MenuItem",menuItemScehma);
 module.exports = MenuItem
+
